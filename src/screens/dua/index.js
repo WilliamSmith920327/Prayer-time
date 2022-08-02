@@ -1,7 +1,6 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   Touchable,
@@ -9,62 +8,52 @@ import {
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Dua} from '../../components/Data';
 import Header from '../../components/Header';
+import Fonts from '../../styles/Fonts';
 import {colors} from '../../styles/colors';
 
-const DuaScreen = props => {
-  const {
-    container,
-    headerTitle,
-    titleContainer,
-    headerContainer,
-    titleText,
-    containerStyle,
-    innerContainer,
-  } = styles;
-  useLayoutEffect(() => {
-    props.navigation.setOptions({
-      headerTitle: props.route.params.title,
-    });
-  }, []);
-
-  const data = props.route.params.data;
-
-  const renderItem = ({item, index}) => {
+const DuaScreen = ({navigation}) => {
+  const {container, innerContainer, titleContainer, titleText} = styles;
+  const data = [
+    {title: 'DUA AHD', id: 1, header: 'Dua Fajr', data: 'Fajr'},
+    {title: 'DUA FARAJ', id: 2, header: 'Dua Dhur', data: 'Dhur'},
+    {title: 'DUA IFTITAH', id: 3, header: 'Dua Asr', data: 'Asr'},
+    {title: 'DUA KUMAIL', id: 4, header: 'Dua Maghrib', data: 'Maghrib'},
+    {title: 'DUA I RAMADAN', id: 5, header: 'Dua Isha', data: 'Isha'},
+    {title: 'DUA TAWASSUL', id: 5, header: 'Dua Isha', data: 'Isha'},
+  ];
+  const {RalewaySemiBold, RalewayBold} = Fonts;
+  const renderItem = ({item}) => {
     return (
-      <View>
-        <TouchableOpacity style={titleContainer} activeOpacity={0.7}>
-          <Text style={[titleText]}>{item.arabic}</Text>
-          <Text style={[titleText, {marginBottom: 20}]}>{item.nor}</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('DuaDetailScreen', {
+            title: item.header,
+            data: item.data,
+            id: item.id,
+          })
+        }
+        style={titleContainer}
+        activeOpacity={0.7}>
+        <Text style={[titleText, RalewayBold]}>{item.title}</Text>
+      </TouchableOpacity>
     );
   };
   return (
-    <ScrollView style={container}>
-      <Header title={'VEIEN TIL ALLAH'} navigation={props.navigation} />
+    <View style={container}>
+      <Header title={'VEIEN TIL ALLAH'} navigation={navigation} />
       <View style={innerContainer}>
-        <View style={headerContainer}>
-          <Text style={headerTitle}>{props.route.params.title}</Text>
-        </View>
         <FlatList
-          data={
-            data === 'Fajr'
-              ? Dua.Fajr
-              : data === 'Dhur'
-              ? Dua.Dhur
-              : data === 'Asr'
-              ? Dua.Asr
-              : data === 'Maghrib'
-              ? Dua.Maghrib
-              : Dua.Isha
-          }
-          contentContainerStyle={containerStyle}
+          data={data}
+          contentContainerStyle={{
+            paddingHorizontal: 20,
+            paddingBottom: 30,
+            paddingTop: 30,
+          }}
           renderItem={renderItem}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -75,70 +64,25 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     backgroundColor: colors.orangeExtraLight,
+    flex: 1,
     marginTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 5,
   },
   titleContainer: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    // backgroundColor: '#ffe8c6',
-    // marginBottom: 25,
-    justifyContent: 'space-between',
-  },
-  titleContainer1: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    backgroundColor: colors.orangeMedium,
-    // marginBottom: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#fff',
+    borderRadius: 30,
+    padding: 15,
+    backgroundColor: '#fff',
+    marginBottom: 25,
+    elevation: 4,
   },
   titleText: {
     fontSize: 17,
-    paddingBottom: 12,
-    paddingHorizontal: 20,
-    color: '#000000',
-    textAlign: 'center',
-  },
-  containerStyle: {
-    marginHorizontal: 20,
-    borderColor: colors.orangeMedium,
-    borderWidth: 1,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-    marginBottom: 30,
-    paddingTop: 10,
-    backgroundColor: '#fff',
-    borderTopWidth: 0,
-    elevation: 4,
-  },
-  headerContainer: {
-    backgroundColor: colors.orangeLight,
-    marginHorizontal: 20,
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-    marginTop: 30,
-    borderColor: colors.orangeMedium,
-    borderWidth: 1,
-    borderBottomWidth: 0,
-    elevation: 4,
-  },
-  headerTitle: {
-    textAlign: 'center',
-    paddingVertical: 12,
-    color: colors.orangeDark,
-    fontWeight: 'bold',
-    fontSize: 16,
+    color: colors.orangeMedium,
   },
 });
 

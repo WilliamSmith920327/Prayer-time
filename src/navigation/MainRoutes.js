@@ -9,69 +9,97 @@ import {
   DrawerItem,
   useDrawerProgress,
 } from '@react-navigation/drawer';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Linking } from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import LinearGradient from 'react-native-linear-gradient';
 import {colors} from '../styles/colors';
-import DuaScreen from '../screens/dua';
-import PrayerDetailScreen from '../screens/PrayerDetail';
-import LibraryScreen from '../screens/Library/Index';
-import LibraryDetailScreen from '../screens/LibraryDetail/Index';
-import AboutUsScreen from '../screens/AboutUs/Index';
-import DuaTab from '../screens/DuaTab/Index';
-import DuaTabDetail from '../screens/DuaTabDetail.js/Index';
+import Fonts from '../styles/Fonts';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const DrawerContent = props => {
+const {Lucida} = Fonts;
+const status = props.state.history[1] ? true: false;
   return (
     <Animated.View
       style={{
         flex: 1,
         backgroundColor: colors.darkBlue,
         width: '100%',
-        marginTop: '30%',
+        marginTop: '40%',
+        // marginVertical:'50%'
       }}>
       <DrawerContentScrollView {...props} scrollEnabled={false}>
         <DrawerItem
-          label="Home"
-          labelStyle={styles.drawerLblStyle}
-          onPress={() => props.navigation.navigate('HomeScreen')}
+          label="Om oss"
+          icon={() =>
+            <FontAwesome name="user-o" size={20} color={'#fff'} />
+          }
+          labelStyle={[styles.drawerLblStyle, Lucida]}
+          onPress={() => props.navigation.navigate('AboutUsScreen')}
         />
         <DrawerItem
-          label="Prayer Table"
-          labelStyle={styles.drawerLblStyle}
-          onPress={() => props.navigation.navigate('PrayerTableScreen')}
+          label="b¢nnetabell"
+          icon={() =>
+            <FontAwesome name="table" size={20} color={'#fff'}/>
+          }
+          labelStyle={[styles.drawerLblStyle, Lucida]}
+          style={{width: '100%'}}
+          onPress={() => props.navigation.navigate('PrayerScreen')}
         />
         <DrawerItem
           label="Qibla"
+          icon={() =>
+            <FontAwesome name="compass" size={20} color={'#fff'} />
+          }
           labelStyle={styles.drawerLblStyle}
           onPress={() => props.navigation.navigate('QiblaScreen')}
         />
         <DrawerItem
           label="Taqibaat"
+          icon={() =>
+            <FontAwesome name="file-text-o" size={20} color={'#fff'} />
+          }
           labelStyle={styles.drawerLblStyle}
           onPress={() => props.navigation.navigate('TaqibaatScreen')}
         />
         <DrawerItem
-          label="Library"
+          label="bibliotek"
+          icon={() =>
+            <Ionicons name="library-outline" size={20} color={'#fff'} />
+          }
           labelStyle={styles.drawerLblStyle}
           onPress={() => props.navigation.navigate('LibraryScreen')}
         />
         <DrawerItem
-          label="About Us"
-          labelStyle={styles.drawerLblStyle}
-          onPress={() => props.navigation.navigate('AboutUsScreen')}
-        />
-        <DrawerItem
           label="Dua"
+          icon={() =>
+            <Ionicons name="book-outline" size={20} color={'#fff'} />
+          }
           labelStyle={styles.drawerLblStyle}
-          onPress={() => props.navigation.navigate('DuaTab')}
+          onPress={() => props.navigation.navigate('DuaScreen')}
         />
       </DrawerContentScrollView>
+      <TouchableOpacity
+        onPress={() => {Linking.openURL('https://2022.veientilallah.no/')}}
+        >
+        <Text
+          style={[
+            {
+              color: '#fff', 
+              textAlign: 'center', 
+              fontSize: 20, 
+              marginBottom: 20, 
+              marginRight: -200, 
+              display: status ? 'flex': 'none'
+            }, 
+              Lucida
+          ]}>
+          www.veientilallah.no
+        </Text>
+      </TouchableOpacity>
     </Animated.View>
   );
 };
@@ -89,90 +117,12 @@ export const Screens = ({navigation, style}) => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          // headerStyle: {backgroundColor: colors.orangeMedium},
-          // headerLeft: () => (
-          //   <TouchableOpacity onPress={navigation.openDrawer}>
-          //     <Ionicons name="menu" size={25} color={'#fff'} />
-          //   </TouchableOpacity>
-          // ),
-          // headerRight: props => {
-          //   return (
-          //     <TouchableOpacity
-          //       style={{marginRight: 15}}
-          //       onPress={() => navigation.goBack()}>
-          //       <Ionicons name="arrow-back-outline" size={25} color={'#fff'} />
-          //     </TouchableOpacity>
-          //   );
-          // },
         }}>
         <Stack.Screen
           options={{headerTitle: ''}}
           name="BottomTab"
           component={BottomTabs}
         />
-        {/* <Stack.Screen
-          options={{
-            headerTitle: 'Dua',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="DuaScreen"
-          component={DuaScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="PrayerDetailScreen"
-          component={PrayerDetailScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="LibraryScreen"
-          component={LibraryScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="AboutUsScreen"
-          component={AboutUsScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="LibraryDetailScreen"
-          component={LibraryDetailScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="DuaTabDetail"
-          component={DuaTabDetail}
-        />
-        <Stack.Screen
-          options={{
-            headerTitle: 'VEIEN TIL ALLAH',
-            headerTintColor: '#fff',
-            headerTitleAlign: 'center',
-          }}
-          name="DuaTab"
-          component={DuaTab}
-        /> */}
       </Stack.Navigator>
     </Animated.View>
   );
@@ -187,7 +137,7 @@ export default () => {
           overlayColor: 'transparent',
           drawerStyle: {
             width: '50%',
-            flex: 1,
+            // flex: 1,
             backgroundColor: colors.darkBlue,
           },
           headerTransparent: true,
@@ -207,13 +157,6 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  line: {
-    borderBottomWidth: 0.6,
-    borderColor: '#fff',
-    width: '60%',
-    marginVertical: 5,
-    marginLeft: 19,
   },
   scene: {
     shadowColor: '#000',
@@ -239,15 +182,12 @@ const styles = StyleSheet.create({
     elevation: 5,
     overflow: 'hidden',
   },
-  drawerStyles: {flex: 1, width: '50%', backgroundColor: 'transparent'},
-  menu: {
-    width: 38,
-    height: 38,
-    margin: 20,
-  },
+
   drawerLblStyle: {
     fontWeight: '500',
     fontSize: 18,
     color: '#fff',
+    marginVertical: 6
+    // marginLeft: -15
   },
 });

@@ -1,4 +1,4 @@
-import { getByDay, getByMonth } from 'prayertiming';
+import { getByDay, getByMonth } from './prayertiming';
 import { prayersCalc, dayCalc } from 'prayer-timetable-lib';
 import { useState } from 'react';
 
@@ -19,13 +19,13 @@ const getDay = (city) => {
     getByDay({
       long: longAndLat[1],
       lat: longAndLat[0],
-      method: 'MWL',
+      method: 'Jafari',
       timeFormat: '24h',
     })
   );
 };
 
-const getMonth = (city, month) => {
+const getMonthdata = (city, month) => {
   const longAndLat = timezoneData[city];
   return (
     getByMonth({
@@ -33,10 +33,10 @@ const getMonth = (city, month) => {
       year: year,
       long: longAndLat[1],
       lat: longAndLat[0],
-      method: 'MWL',
+      method: 'Jafari',
       timeFormat: '24h',
     }) // returns an array of object
   )
 }
 
-export {getMonth, getDay};
+export {getMonthdata, getDay, timezoneData};

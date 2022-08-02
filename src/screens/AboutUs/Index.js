@@ -28,7 +28,7 @@ const AboutUsScreen = ({navigation}) => {
 
   return (
     <View style={container}>
-      <Header title={'VEIEN TIL ALLAH'} navigation={navigation} />
+      <Header title={'AboutUS'} navigation={navigation} />
       <View style={innerContainer}>
         <Text style={[aboutText, RalewayMedium]}>
           Veien til Allah-prosjektet har et mål er å gjøre stoff om islam og
@@ -119,6 +119,10 @@ const styles = StyleSheet.create({
   aboutText: {
     fontSize: 16,
     marginTop: 30,
+    padding: 10,
+    textAlign: "justify",
+    // textAlignVertical: 2
+    lineHeight: 30,
   },
   titleContainer: {
     // alignItems: 'center',

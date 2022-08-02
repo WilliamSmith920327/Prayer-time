@@ -26,7 +26,7 @@ const TaqibaatScreen = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('DuaScreen', {
+          navigation.navigate('TaqibaatDetailScreen', {
             title: item.header,
             data: item.data,
           })

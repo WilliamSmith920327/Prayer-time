@@ -12,8 +12,10 @@ import {colors} from '../../styles/colors';
 import Header from '../../components/Header';
 
 const PrayerScreen = ({navigation}) => {
+  // const [page, setPage] = useState('main');
+
   const {container, innerContainer, titleContainer, titleText} = styles;
-  const data = [
+  const mian_data = [
     {title: 'BERGEN', id: 1},
     {title: 'KRISTIANSAND', id: 2},
     {title: 'OSLO', id: 3},
@@ -37,7 +39,7 @@ const PrayerScreen = ({navigation}) => {
       <Header title={'Prayer'} navigation={navigation} />
       <View style={innerContainer}>
         <FlatList
-          data={data}
+          data={mian_data}
           contentContainerStyle={{
             paddingHorizontal: 20,
             paddingBottom: 30,

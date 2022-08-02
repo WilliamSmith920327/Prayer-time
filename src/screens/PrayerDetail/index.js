@@ -1,17 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {getMonth} from '../../components/PrayerTableData';
+import {getMonthdata} from '../../components/PrayerTableData';
 import {colors} from '../../styles/colors';
 import Header from '../../components/Header';
+import SunCalc from 'suncalc';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+const times = SunCalc.getTimes(new Date(), 59.9167, 10.75);
+var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+console.log(times);
 
 const PrayerDetailScreen = props => {
   const city = props.route.params.title;
   const date = new Date();
-  const month = date.getMonth();
-  const data = getMonth(city, month);
+  const [month, setMonth] = useState(date.getMonth());
+  const data = getMonthdata(city, month);
   const {container, headerText, tableHeader, itemText, tableContainer, innerContainer} = styles;
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
   const renderItem = ({item}) => {
+    const item_month = item.date.getUTCMonth();
+    const item_date = item.date.getUTCDate();
+    const item_fajr = item.fajr.split(':');
+    if((item_month == 3 && item_date >= 28) || (item_month == 7 && item_date <= 15) || (item_month >= 4 && item_month <= 6)) {
+      const fajr_min = Number(item_fajr[1]) + 30;
+      if(fajr_min >= 60){
+        item_fajr[0] = (Number(item_fajr[0]) + 1).toString();
+        item_fajr[1] = (fajr_min - 60).toString();
+      }
+      item_fajr[1] = fajr_min.toString();
+    }
+
     return (
       <View
         style={{
@@ -21,10 +41,10 @@ const PrayerDetailScreen = props => {
         }}>
 
         <Text numberOfLines={1} style={[itemText]}>
-          {item.date.getUTCDate() +'.'+ (item.date.getUTCMonth() + 1)}
+          {item_date +'.'+ (item_month + 1)}
         </Text>
         <Text style={[itemText]}>{item.imsak}</Text>
-        <Text style={[itemText]}>{item.fajr}</Text>
+        <Text style={[itemText]}>{`${(item_fajr[0]/100).toString().substr(2)}:${(item_fajr[1]/100).toString().substr(2)}`}</Text>
         <Text style={[itemText]}>{item.sunrise}</Text>
         <Text style={[itemText]}>{item.dhuhr}</Text>
         <Text style={[itemText]}>{item.sunset}</Text>
@@ -35,22 +55,31 @@ const PrayerDetailScreen = props => {
 
   return (
     <View style={container}>
-        <Header title={'Prayer'} navigation={props.navigation} />
+        <Header title={'PrayerScreen'} navigation={props.navigation} />
         <View style={innerContainer}>
-          {/* <Text style={headerText}>{props.route.params.title}</Text> */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 45, marginTop: 30}}>
+            <TouchableOpacity onPress={() => {month > 0 ? setMonth(month - 1): ''}}>
+              <FontAwesome name="chevron-left" size={22} color={colors.orangeMedium}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Text style={{fontSize: 18, color: colors.darkBlue}}>{`  ${months[month]}  ${date.getUTCFullYear()}  `}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {month < 11 ? setMonth(month + 1): ''}}>
+            <FontAwesome name="chevron-right" size={22} color={colors.orangeMedium}/>
+            </TouchableOpacity>
+          </View>
           <View
             style={{
-              // height: '80%',
               marginHorizontal: 39,
-              marginTop: 30,
-              marginBottom: 80,
+              marginTop: 10,
               borderColor: colors.orangeMedium,
               borderWidth: 1,
               borderRadius: 15,
               backgroundColor: '#fff',
               elevation: 4,
               margin: 5,
-              paddingBottom: 10
+              paddingBottom: 10,
+              height: '80%'
             }}>
             <View style={tableContainer}>
               <Text style={[tableHeader]}>Dato</Text>
@@ -88,6 +117,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 5,
+    height: '100%'
   },
   headerText: {
     fontSize: 18,

@@ -1,24 +1,23 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useRef} from 'react';
-import HomeScreen from '../screens/home';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import Fonts from '../styles/Fonts';
 import {colors} from '../styles/colors';
+import { Shadow } from 'react-native-shadow-2';
+import HomeScreen from '../screens/home';
 import PrayerScreen from '../screens/prayer';
 import QiblaScreen from '../screens/qibla';
 import TaqibaatScreen from '../screens/taqibaat';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Fonts from '../styles/Fonts';
-import DuaTab from '../screens/DuaTab/Index';
-import DuaTabDetail from '../screens/DuaTabDetail.js/Index';
+import TaqibaatDetailScreen from '../screens/taqibaatDetail/Index';
 import LibraryScreen from '../screens/Library/Index';
 import LibraryDetailScreen from '../screens/LibraryDetail/Index';
+import PrayerDetailScreen from '../screens/PrayerDetail/index';
+import DuaScreen from '../screens/Dua/Index';
+import DuaDetailScreen from '../screens/DuaDetail/Index';
 import AboutUsScreen from '../screens/AboutUs/Index';
-import PrayerDetailScreen from '../screens/PrayerDetail';
-import DuaScreen from '../screens/DuaTabDetail.js/Index';
-import { Shadow } from 'react-native-shadow-2';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +40,10 @@ const circle1 = {
   1: {scale: 1},
 };
 const circle2 = {0: {scale: 1}, 1: {scale: 0}};
+
 const TabButton = ({state, descriptors, navigation}) => {
+  const tab_index = state.index == 4 ? 1: state.index == 5 ? 3: state.index;
+  
   return (
     <View>
       <Shadow>
@@ -59,7 +61,7 @@ const TabButton = ({state, descriptors, navigation}) => {
             backgroundColor: colors.orangeLight,
           }}>
           {TabArr.map((item, index) => {
-            const isFocused = state.index === index;
+            const isFocused = tab_index === index;
             const textRef = useRef(null);
             const viewRef = useRef(null);
             const circleRef = useRef(null);
@@ -98,7 +100,6 @@ const TabButton = ({state, descriptors, navigation}) => {
                       />
                       <FontAwesome
                         color={isFocused ? 'white' : colors.orangeDark}
-                        // style={{marginBottom: 5}}
                         size={25}
                         origin={item.origin}
                         name={item.name}
@@ -108,11 +109,11 @@ const TabButton = ({state, descriptors, navigation}) => {
                       style={[
                         {
                           fontSize: 12,
-                          color: '#262444',
                           textAlign: 'center',
                           marginTop: 4,
                           marginBottom: 0,
                         },
+                        {color: isFocused ? '#262444' : colors.orangeDark},
                         RalewaySemiBold,
                       ]}
                       ref={textRef}>
@@ -138,7 +139,7 @@ const TabArr = [
     component: HomeScreen,
   },
   {
-    route: 'PrayerTableScreen',
+    route: 'PrayerScreen',
     id: 2,
     //   origin: ICON_TYPE.TABLE,
     name: 'table',
@@ -162,96 +163,51 @@ const TabArr = [
     component: TaqibaatScreen,
   },
 ];
+
 const screenArr = [
   {
     route: 'HomeScreen',
-    id: 1,
-    label: 'Home',
-    //   origin: ICON_TYPE.OCTICONS,
-    name: 'home',
     component: HomeScreen,
   },
   {
-    route: 'PrayerTableScreen',
-    id: 2,
-    //   origin: ICON_TYPE.TABLE,
-    name: 'table',
-    label: 'Prayer Table',
+    route: 'PrayerScreen',
     component: PrayerScreen,
   },
   {
     route: 'QiblaScreen',
-    label: 'Qibla',
-    id: 3,
-    //   origin: ICON_TYPE.COMPASS,
-    name: 'compass',
     component: QiblaScreen,
   },
   {
     route: 'TaqibaatScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: TaqibaatScreen,
   },
   {
     route: 'PrayerDetailScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: PrayerDetailScreen,
   },
-
   {
-    route: 'DuaTab',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
-    component: DuaTab,
-  },
-  {
-    route: 'DuaTabDetail',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
-    component: DuaTabDetail,
+    route: 'TaqibaatDetailScreen',
+    component: TaqibaatDetailScreen,
   },
   {
     route: 'LibraryScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: LibraryScreen,
   },
   {
     route: 'LibraryDetailScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: LibraryDetailScreen,
   },
   {
     route: 'AboutUsScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: AboutUsScreen,
   },
-
   {
     route: 'DuaScreen',
-    id: 4,
-    label: 'Taqibaat',
-    //   origin: ICON_TYPE.TEXT,
-    name: 'file-text-o',
     component: DuaScreen,
+  },
+  {
+    route: 'DuaDetailScreen',
+    component: DuaDetailScreen,
   },
 ];
 
@@ -273,20 +229,20 @@ const BottomTabs = () => {
             options={({navigation}) => ({
               headerShown: false,
               // headerStyle: {backgroundColor: colors.orangeMedium},
-          // headerLeft: () => (
-          //   <TouchableOpacity onPress={navigation.openDrawer}>
-          //     <Ionicons name="menu" size={25} color={'#fff'} />
-          //   </TouchableOpacity>
-          // ),
-          // headerRight: props => {
-          //   return (
-          //     <TouchableOpacity
-          //       style={{marginRight: 15}}
-          //       onPress={() => navigation.goBack()}>
-          //       <Ionicons name="arrow-back-outline" size={25} color={'#fff'} />
-          //     </TouchableOpacity>
-          //   );
-          // },
+              // headerLeft: () => (
+              //   <TouchableOpacity onPress={navigation.openDrawer}>
+              //     <Ionicons name="menu" size={25} color={'#fff'} />
+              //   </TouchableOpacity>
+              // ),
+              // headerRight: props => {
+              //   return (
+              //     <TouchableOpacity
+              //       style={{marginRight: 15}}
+              //       onPress={() => navigation.goBack()}>
+              //       <Ionicons name="arrow-back-outline" size={25} color={'#fff'} />
+              //     </TouchableOpacity>
+              //   );
+              // },
               // tabBarButton: props => <TabButton {...props} item={item} />,
             })}
           />
@@ -301,11 +257,10 @@ const tabStyle = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
+    borderWidth: 5,
+    borderColor: colors.orangeExtraLight,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderWidth: 6,
-    borderColor: '#fff',
   },
   container: {
     flex: 1,

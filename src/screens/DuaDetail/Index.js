@@ -13,7 +13,7 @@ import {Dua} from '../../components/Data';
 import Header from '../../components/Header';
 import {colors} from '../../styles/colors';
 
-const DuaScreen = props => {
+const DuaDetailScreen = props => {
   const {
     container,
     headerTitle,
@@ -23,11 +23,11 @@ const DuaScreen = props => {
     containerStyle,
     innerContainer,
   } = styles;
-  //   useLayoutEffect(() => {
-  //     props.navigation.setOptions({
-  //       headerTitle: props.route.params.title,
-  //     });
-  //   }, []);
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: props.route.params.title,
+    });
+  }, []);
 
   const data = props.route.params.data;
 
@@ -43,8 +43,8 @@ const DuaScreen = props => {
   };
   return (
     <View style={container}>
-      <Header title={'VEIEN TIL ALLAH'} navigation={props.navigation} />
-      <ScrollView style={innerContainer}>
+      <Header title={'DuaScreen'} navigation={props.navigation} />
+      <View style={innerContainer}>
         <View style={headerContainer}>
           <Text style={headerTitle}>{props.route.params.title}</Text>
         </View>
@@ -63,7 +63,7 @@ const DuaScreen = props => {
           contentContainerStyle={containerStyle}
           renderItem={renderItem}
         />
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -81,10 +81,23 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   titleContainer: {
+    // alignItems: 'center',
+    // borderWidth: 2,
+    // borderColor: colors.primaryColor,
+    // borderRadius: 30,
+    // padding: 15,
+    // backgroundColor: '#ffe8c6',
+    // marginBottom: 25,
     justifyContent: 'space-between',
   },
   titleContainer1: {
+    // alignItems: 'center',
+    // borderWidth: 2,
+    // borderColor: colors.primaryColor,
+    // borderRadius: 30,
+    // padding: 15,
     backgroundColor: colors.orangeMedium,
+    // marginBottom: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderTopLeftRadius: 15,
@@ -129,4 +142,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DuaScreen;
+export default DuaDetailScreen;

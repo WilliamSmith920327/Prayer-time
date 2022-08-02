@@ -54,7 +54,6 @@ const LibraryScreen = ({navigation}) => {
           contentContainerStyle={{
             paddingHorizontal: 20,
             paddingBottom: 30,
-            paddingTop: 30,
           }}
           renderItem={renderItem}
         />
@@ -70,11 +69,11 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     backgroundColor: colors.orangeExtraLight,
-    flex: 1,
     marginTop: 30,
+    paddingTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    elevation: 5,
+    elevation: 3,
   },
   titleContainer: {
     alignItems: 'center',

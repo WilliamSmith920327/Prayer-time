@@ -3,8 +3,10 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {colors} from '../styles/colors';
 import Fonts from '../styles/Fonts';
-
+// DuaTabDetail,PrayerScreen
 const Header = props => {
+  console.log(props.title);
+
   const {container, headerText} = styles;
   const {RalewaySemiBold, RalewayBold} = Fonts;
   return (
@@ -13,7 +15,7 @@ const Header = props => {
         <Ionicons name="menu" size={25} color={colors.darkBlue} />
       </TouchableOpacity>
       <Text style={[headerText, RalewayBold]}>Veien til Allah</Text>
-      <TouchableOpacity onPress={() => props.navigation.goBack()}>
+      <TouchableOpacity onPress={() => props.navigation.navigate(props.title)}>
         <Ionicons name="arrow-back-outline" size={25} color={colors.darkBlue} />
       </TouchableOpacity>
     </View>

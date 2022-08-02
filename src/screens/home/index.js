@@ -17,30 +17,33 @@ import Header from '../../components/Header';
 import CountDown from 'react-native-countdown-component';
 
 const HomeScreen = ({navigation}) => {
-
   const [city, setCity] = useState('OSLO');
   const [alarm, setAlarm] = useState();
   useEffect (() => {
     getDay(city);
   },[city]);
-
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const DayData = getDay(city);
   const data = [
     {key: 'Imsak', value: DayData.imsak},
-    {key: 'Fire', value: DayData.fajr},
-    {key: 'Sunrise', value: DayData.sunrise},
+    {key: 'Fajr', value: DayData.fajr},
+    {key: 'Soloppgang', value: DayData.sunrise},
     {key: 'Dhur', value: DayData.dhuhr},
     {key: 'Asr', value: DayData.asr},
-    {key: 'Sunset', value: DayData.sunset},
+    {key: 'Solnedgang', value: DayData.sunset},
     {key: 'Maghrib', value: DayData.maghrib},
     {key: 'Isha', value: DayData.isha},
-    {key: 'Midnight', value: DayData.midnight}];
+    {key: 'Midnatt', value: DayData.midnight}];
 
   const {
     container,
     innerContainer,
-    titleContainer1,
-    titleHeaderText
+    titleContainer,
+    buttonStyle,
+    dropdownStyle,
+    dateStyle,
+    nextStyle,
+    buttonTextStyle
   } = styles;
   const {RalewayMedium, RalewayBold} = Fonts;
 
@@ -52,7 +55,6 @@ const HomeScreen = ({navigation}) => {
   const month = today.getMonth();
   const date = today.getDate();
   const dataArray = [];
-  console.log(date);
 
   data.forEach(element => {
     const array_time = element.value.split(":");
@@ -62,33 +64,27 @@ const HomeScreen = ({navigation}) => {
     const element_seconds = element_time.getTime();
     const near = element_seconds - now_seconds;
     const ele = {key: element.key, sec: near};
-    console.log(element_time, today);
     
     if (near > 0) {dataArray.push(ele)};
   });
   const nextAlarm = dataArray.length > 0 ? dataArray[0].key : '';
   dataArray.sort(function(a, b){return a.sec - b.sec});
-  console.log(dataArray);
   const until = dataArray.length > 0 ? dataArray[0].sec : 0;
 
   const listHeader = () => {
     return (
       <View>
         <TouchableOpacity
-          style={
-            [titleContainer1, {paddingTop: 10, marginBottom: 6}]
-          }
+          style={titleContainer}
           activeOpacity={0.7}>
           <View style={{width: '60%'}}>
             <SelectDropdown
               data={cities}
-              buttonStyle={{backgroundColor: colors.orangeMedium, width: '100%', height:40, padding: 0, borderTopRightRadius: 20 , borderBottomRightRadius: 20, marginBottom: 10}}
-              buttonTextStyle={[titleHeaderText, {color: colors.darkBlue, paddingLeft: 0, fontSize: 10}, RalewayBold]}
-              dropdownStyle={{backgroundColor: colors.orangeLight, borderRadius: 10}}
+              buttonStyle={buttonStyle}
+              buttonTextStyle={buttonTextStyle}
+              dropdownStyle={dropdownStyle}
               defaultValue={city}
-              // dropdownIconPosition={'left'}
               onSelect={(selectedItem, index) => {
-                // console.log(selectedItem, index);
                 setCity(selectedItem);
               }}
               renderDropdownIcon={ () =>
@@ -114,10 +110,9 @@ const HomeScreen = ({navigation}) => {
           <View style={{width: '40%'}}>
             <Text
               style={[
-                RalewayMedium,
-                { fontWeight: 'bold', fontSize: 13, backgroundColor: colors.orangeMedium, width: '100%', height:40, paddingTop: 10, paddingLeft: 20, borderBottomLeftRadius: 20 , borderTopLeftRadius: 20, marginBottom: 10}
+                RalewayMedium,dateStyle
               ]}>
-              {DayData.date.toDateString()}
+              {(DayData.date.getUTCDate()/100).toString().substr(2) + " " + months[DayData.date.getMonth()]}
             </Text>
           </View>
         </TouchableOpacity>
@@ -151,21 +146,19 @@ const HomeScreen = ({navigation}) => {
           keyExtractor={item => item.key}
         />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text style={[{textAlign: 'center', fontWeight: 'bold', fontSize: 20, color: colors.orangeDark}, RalewayMedium]}>Next: &nbsp;</Text>
-          <Text style={[{textAlign: 'center', fontWeight: 'bold', fontSize: 20, color: colors.orangeDark}, RalewayMedium]}>{nextAlarm}</Text>
+          <Text style={[nextStyle, RalewayMedium]}>Next: &nbsp;</Text>
+          <Text style={[nextStyle, RalewayMedium]}>{nextAlarm}</Text>
         </View>
         <CountDown
           size={30}
           until={until/1000}
           onFinish={() => alert(nextAlarm)}
-          digitStyle={{marginBottom: 40}}
-          digitTxtStyle={{color: colors.darkBlue,}}
-          timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
-          separatorStyle={{marginBottom: 42}}
+          digitStyle={{marginBottom: 0,width: 60}}
+          digitTxtStyle={{color: colors.darkBlue}}
           timeToShow={['H', 'M', 'S']}
           timeLabels={{m: null, s: null}}
           showSeparator
-          running={false}
+          running={true}
         />
       </View>
     </View>
@@ -186,26 +179,45 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   titleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginHorizontal: 10,
-  },
-  titleContainer1: {
     backgroundColor: colors.orangeLight,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    // paddingHorizontal: 10
+    marginBottom: 5,
+    paddingBottom: 5
   },
-  titleText: {
-    fontSize: 17,
-    paddingBottom: 12,
-    paddingHorizontal: 20,
+  buttonStyle: {
+    backgroundColor: colors.orangeLight, 
+    width: '100%', 
+    height:40, 
+    padding: 0, 
+    borderRadius: 20,
   },
-  titleHeaderText: {
-    fontSize: 17,
+  dropdownStyle: {
+    backgroundColor: colors.orangeLight, 
+    borderRadius: 10
   },
+  dateStyle: {
+    color: "#d86c6c", 
+    textAlign: 'center', 
+    fontWeight: 'bold', 
+    fontSize: 17, 
+    backgroundColor: colors.orangeLight, 
+    width: '100%', height:40, 
+    paddingTop: 10, 
+    paddingLeft: 20, 
+    borderRadius: 20, 
+  },
+  nextStyle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: "#d86c6c"
+  },
+  buttonTextStyle: {
+    color: "#d86c6c"
+  }
 });
 
 export default HomeScreen;

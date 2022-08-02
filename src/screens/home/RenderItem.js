@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     titleContainer: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
-      marginHorizontal: 10,
+      marginHorizontal: 15,
+      marginVertical: 2
     },
     titleText: {
       fontSize: 17,

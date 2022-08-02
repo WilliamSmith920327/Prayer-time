@@ -19,4 +19,7 @@ export default StyleSheet.create({
   RalewayLight: {
     fontFamily: 'Raleway-Light',
   },
+  Lucida: {
+    fontFamily: 'Century Gothic'
+  }
 });

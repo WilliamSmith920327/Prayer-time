@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Dua} from '../../components/Data';
 import {LibraryData} from '../../components/LibraryData';
 import {colors} from '../../styles/colors';
 import Fonts from '../../styles/Fonts';
@@ -22,25 +20,23 @@ const LibraryDetailScreen = props => {
     headerTitle,
     titleContainer,
     headerContainer,
-    titleText,
     containerStyle,
     innerContainer,
   } = styles;
 
   const {data, id} = props.route.params;
-  console.log(LibraryData[3].data);
   const source = {
     html: LibraryData[id - 1].data,
   };
   const {RalewaySemiBold, RalewayBold} = Fonts;
   return (
     <View style={container}>
-      <Header title={'VEIEN TIL ALLAH'} navigation={props.navigation} />
-      <ScrollView style={innerContainer}>
+      <Header title={'LibraryScreen'} navigation={props.navigation} />
+      <View style={innerContainer}>
         <View style={headerContainer}>
           <Text style={[headerTitle, RalewayBold]}>{data}</Text>
         </View>
-        <View style={containerStyle}>
+        <ScrollView style={containerStyle}>
           <TouchableOpacity style={titleContainer} activeOpacity={0.7}>
             <RenderHtml
               source={source}
@@ -52,8 +48,8 @@ const LibraryDetailScreen = props => {
               systemFonts={['Raleway-Regular']}
             />
           </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -63,30 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.orangeMedium,
   },
-  innerContainer: {},
-  titleContainer: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    // backgroundColor: '#ffe8c6',
-    // marginBottom: 25,
-    justifyContent: 'space-between',
-  },
-  titleContainer1: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    backgroundColor: colors.orangeMedium,
-    // marginBottom: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
+
   innerContainer: {
     backgroundColor: colors.orangeExtraLight,
     flex: 1,
@@ -95,12 +68,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     elevation: 5,
   },
-  titleText: {
-    fontSize: 17,
-    paddingBottom: 12,
-    paddingHorizontal: 20,
-    color: '#000000',
-    textAlign: 'center',
+
+  titleContainer: {
+    justifyContent: 'space-between',
   },
   containerStyle: {
     marginHorizontal: 20,
