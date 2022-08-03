@@ -12,11 +12,11 @@ const Header = props => {
   return (
     <View style={container}>
       <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-        <Ionicons name="menu" size={25} color={colors.darkBlue} />
+        <Ionicons name="menu" size={25} color={colors.Blue} />
       </TouchableOpacity>
       <Text style={[headerText, RalewayBold]}>Veien til Allah</Text>
       <TouchableOpacity onPress={() => props.navigation.navigate(props.title)}>
-        <Ionicons name="arrow-back-outline" size={25} color={colors.darkBlue} />
+        <Ionicons name="arrow-back-outline" size={25} color={colors.Blue} />
       </TouchableOpacity>
     </View>
   );
@@ -24,14 +24,15 @@ const Header = props => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
+    paddingVertical: 30,
     paddingHorizontal: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: colors.orangeDark
   },
   headerText: {
     fontSize: 20,
-    color: colors.darkBlue,
+    color: colors.Blue,
   },
 });
 

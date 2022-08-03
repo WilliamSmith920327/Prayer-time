@@ -16,7 +16,7 @@ const PrayerDetailScreen = props => {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth());
   const data = getMonthdata(city, month);
-  const {container, headerText, tableHeader, itemText, tableContainer, innerContainer} = styles;
+  const {container, tableHeader, itemText, tableContainer, innerContainer} = styles;
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
   const renderItem = ({item}) => {
@@ -59,23 +59,23 @@ const PrayerDetailScreen = props => {
         <View style={innerContainer}>
           <View style={{flexDirection: 'row', justifyContent: 'space-around', marginHorizontal: 45, marginTop: 30}}>
             <TouchableOpacity onPress={() => {month > 0 ? setMonth(month - 1): ''}}>
-              <FontAwesome name="chevron-left" size={22} color={colors.orangeMedium}/>
+              <FontAwesome name="chevron-left" size={22} color={colors.orangeDark}/>
             </TouchableOpacity>
             <TouchableOpacity>
-            <Text style={{fontSize: 18, color: colors.darkBlue}}>{`  ${months[month]}  ${date.getUTCFullYear()}  `}</Text>
+            <Text style={{fontSize: 18, color: colors.Blue}}>{`  ${months[month]}  ${date.getUTCFullYear()}  `}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {month < 11 ? setMonth(month + 1): ''}}>
-            <FontAwesome name="chevron-right" size={22} color={colors.orangeMedium}/>
+            <FontAwesome name="chevron-right" size={22} color={colors.orangeDark}/>
             </TouchableOpacity>
           </View>
           <View
             style={{
               marginHorizontal: 39,
               marginTop: 10,
-              borderColor: colors.orangeMedium,
+              borderColor: colors.orangeDark,
               borderWidth: 1,
               borderRadius: 15,
-              backgroundColor: '#fff',
+              backgroundColor: colors.lightgrey,
               elevation: 4,
               margin: 5,
               paddingBottom: 10,
@@ -93,7 +93,7 @@ const PrayerDetailScreen = props => {
             <FlatList
               data={data}
               contentContainerStyle={{
-                backgroundColor: '#fff',
+                backgroundColor: colors.lightgrey,
                 borderRadius: 15,
               }}
               renderItem={renderItem}
@@ -108,26 +108,18 @@ const PrayerDetailScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
+    backgroundColor: colors.orangeLight,
     flex: 1,
-    marginTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 5,
     height: '100%'
   },
-  headerText: {
-    fontSize: 18,
-    color: 'grey',
-    marginHorizontal: 20,
-    marginTop: 20,
-    marginBottom: 30,
-  },
   tableHeader: {
-    color: colors.orangeDark,
+    color: colors.red,
     fontSize: 12,
     flex: 1,
     textAlign: 'center',
@@ -135,7 +127,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.7
   },
   itemText: {
-    color: '#000000',
+    color: colors.Blue,
     flex: 1,
     textAlign: 'center',
     marginTop: 10,

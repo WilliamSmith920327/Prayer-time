@@ -14,13 +14,12 @@ import Geolocation from '@react-native-community/geolocation';
 import Header from '../../components/Header';
 import Fonts from '../../styles/Fonts';
 
-const AboutUsScreen = ({navigation}) => {
+const AboutUsScreen = props => {
   const {
     container,
     innerContainer,
-    titleContainer,
-    titleContainer1,
-    titleText,
+    headerContainer,
+    headerTitle,
     aboutText,
     socialText,
   } = styles;
@@ -28,69 +27,86 @@ const AboutUsScreen = ({navigation}) => {
 
   return (
     <View style={container}>
-      <Header title={'AboutUS'} navigation={navigation} />
+      <Header title={'HomeScreen'} navigation={props.navigation} />
       <View style={innerContainer}>
-        <Text style={[aboutText, RalewayMedium]}>
-          Veien til Allah-prosjektet har et mål er å gjøre stoff om islam og
-          muslimer lett tilgjengelig ved bruk av forskjellige typer medier. Vi
-          ønsker å spre det riktige islamske budskapet samtidig som vi ønsker at
-          islam skal bli forstått slik den bør forstås. Vi vil vise frem
-          religionen som profeten Mohammad (fvmh) og hans Ahlulbayt (fvmh) holdt
-          fast ved. I det offentlige rom er det et voksende behov for kjennskap
-          til islam. Vi håper at alle sammen, muslimer som ikke-muslimer, har
-          gleden av å bruke kunnskapen «Veien til Allah»-prosjektet tilbyr. Følg
-          oss gjerne på:
-        </Text>
         <View
           style={{
-            alignItems: 'center',
-            marginTop: 30,
-            flexDirection: 'row',
-            justifyContent: 'center',
+            marginHorizontal: 39,
+            marginTop: 10,
+            height: '80%',
+            borderColor: colors.orangeDark,
+            borderWidth: 1,
+            borderRadius: 15,
+            backgroundColor: colors.lightgrey,
+            elevation: 4,
+            margin: 5,
+            paddingBottom: 10
           }}>
-          <View style={{flexDirection: 'row'}}>
-            <Ionicons
-              style={{marginRight: 5}}
-              name="logo-facebook"
-              size={20}
-              color={colors.darkBlue}
-            />
-            <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+          <View style={headerContainer}>
+            <Text style={headerTitle}>Om oss</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
-            <Ionicons
-              style={{marginLeft: 20, marginRight: 5}}
-              name="logo-instagram"
-              size={20}
-              color={colors.darkBlue}
-            />
-            <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+          <Text style={[aboutText, RalewayMedium]}>
+            Veien til Allah-prosjektet har et mål er å gjøre stoff om islam og
+            muslimer lett tilgjengelig ved bruk av forskjellige typer medier. Vi
+            ønsker å spre det riktige islamske budskapet samtidig som vi ønsker at
+            islam skal bli forstått slik den bør forstås. Vi vil vise frem
+            religionen som profeten Mohammad (fvmh) og hans Ahlulbayt (fvmh) holdt
+            fast ved. I det offentlige rom er det et voksende behov for kjennskap
+            til islam. Vi håper at alle sammen, muslimer som ikke-muslimer, har
+            gleden av å bruke kunnskapen «Veien til Allah»-prosjektet tilbyr. Følg
+            oss gjerne på:
+          </Text>
+          <View
+            style={{
+              alignItems: 'center',
+              marginTop: 30,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <View style={{flexDirection: 'row'}}>
+              <Ionicons
+                style={{marginRight: 5}}
+                name="logo-facebook"
+                size={20}
+                color={colors.Blue}
+              />
+              <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Ionicons
+                style={{marginLeft: 20, marginRight: 5}}
+                name="logo-instagram"
+                size={20}
+                color={colors.Blue}
+              />
+              <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: 30,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Ionicons
-              style={{marginRight: 5}}
-              name="logo-youtube"
-              size={20}
-              color={colors.darkBlue}
-            />
-            <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <Ionicons
-              style={{marginLeft: 20, marginRight: 5}}
-              name="logo-twitter"
-              size={20}
-              color={colors.darkBlue}
-            />
-            <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+          <View
+            style={{
+              alignItems: 'center',
+              marginTop: 30,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <View style={{flexDirection: 'row'}}>
+              <Ionicons
+                style={{marginRight: 5}}
+                name="logo-youtube"
+                size={20}
+                color={colors.Blue}
+              />
+              <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Ionicons
+                style={{marginLeft: 20, marginRight: 5}}
+                name="logo-twitter"
+                size={20}
+                color={colors.Blue}
+              />
+              <Text style={[socialText, RalewaySemiBold]}>veientilallah</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -101,58 +117,33 @@ const AboutUsScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    flex: 1,
-
-    backgroundColor: colors.orangeExtraLight,
+    backgroundColor: colors.orangeLight,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    marginTop: 30,
-    elevation: 5,
-    paddingHorizontal: 20,
+    height: '100%'
   },
   socialText: {
-    color: colors.darkBlue,
+    color: colors.Blue,
   },
   aboutText: {
     fontSize: 16,
-    marginTop: 30,
     padding: 10,
-    textAlign: "justify",
-    // textAlignVertical: 2
-    lineHeight: 30,
+    textAlign: "center",
   },
-  titleContainer: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    // backgroundColor: '#ffe8c6',
-    // marginBottom: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  titleContainer1: {
-    // alignItems: 'center',
-    // borderWidth: 2,
-    // borderColor: colors.primaryColor,
-    // borderRadius: 30,
-    // padding: 15,
-    backgroundColor: colors.orangeLight,
-    // marginBottom: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-  titleText: {
+  headerTitle: {
+    textAlign: 'center',
+    paddingVertical: 12,
+    color: colors.red,
+    fontWeight: 'bold',
     fontSize: 17,
-    paddingBottom: 12,
-    paddingHorizontal: 20,
-    color: colors.orangeDark,
+  },
+  headerContainer: {
+    backgroundColor: colors.orangeLight,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
   },
 });
 

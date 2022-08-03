@@ -94,12 +94,12 @@ const TabButton = ({state, descriptors, navigation}) => {
                         ref={circleRef}
                         style={{
                           ...StyleSheet.absoluteFillObject,
-                          backgroundColor: colors.orangeDark,
+                          backgroundColor: colors.red,
                           borderRadius: 25,
                         }}
                       />
                       <FontAwesome
-                        color={isFocused ? 'white' : colors.orangeDark}
+                        color={isFocused ? 'white' : colors.red}
                         size={25}
                         origin={item.origin}
                         name={item.name}
@@ -113,7 +113,7 @@ const TabButton = ({state, descriptors, navigation}) => {
                           marginTop: 4,
                           marginBottom: 0,
                         },
-                        {color: isFocused ? '#262444' : colors.orangeDark},
+                        {color: isFocused ? colors.Blue : colors.red},
                         RalewaySemiBold,
                       ]}
                       ref={textRef}>
@@ -215,7 +215,7 @@ const BottomTabs = () => {
   return (
     <Tab.Navigator
       tabBar={props => (
-        <View style={{backgroundColor: colors.orangeExtraLight, elevation: 3}}>
+        <View style={{backgroundColor: colors.orangeLight, elevation: 3}}>
           <TabButton {...props} />
         </View>
       )}
@@ -228,22 +228,6 @@ const BottomTabs = () => {
             component={item.component}
             options={({navigation}) => ({
               headerShown: false,
-              // headerStyle: {backgroundColor: colors.orangeMedium},
-              // headerLeft: () => (
-              //   <TouchableOpacity onPress={navigation.openDrawer}>
-              //     <Ionicons name="menu" size={25} color={'#fff'} />
-              //   </TouchableOpacity>
-              // ),
-              // headerRight: props => {
-              //   return (
-              //     <TouchableOpacity
-              //       style={{marginRight: 15}}
-              //       onPress={() => navigation.goBack()}>
-              //       <Ionicons name="arrow-back-outline" size={25} color={'#fff'} />
-              //     </TouchableOpacity>
-              //   );
-              // },
-              // tabBarButton: props => <TabButton {...props} item={item} />,
             })}
           />
         );
@@ -258,7 +242,7 @@ const tabStyle = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     borderWidth: 5,
-    borderColor: colors.orangeExtraLight,
+    borderColor: colors.orangeLight,
     justifyContent: 'center',
     alignItems: 'center',
   },

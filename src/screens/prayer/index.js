@@ -55,30 +55,27 @@ const PrayerScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
+    backgroundColor: colors.orangeLight,
     flex: 1,
-    marginTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 5,
   },
   titleContainer: {
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#fff',
     borderRadius: 30,
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: colors.lightgrey,
     marginBottom: 25,
     elevation: 4,
   },
   titleText: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: colors.orangeMedium,
+    color: colors.orangeDark,
   },
 });
 

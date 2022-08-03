@@ -41,22 +41,24 @@ const LibraryScreen = ({navigation}) => {
         }
         style={titleContainer}
         activeOpacity={0.7}>
-        <Text style={[titleText, RalewayBold]}>{item.title}</Text>
+        <Text style={[titleText, RalewayBold]}>{item.title.toUpperCase()}</Text>
       </TouchableOpacity>
     );
   };
   return (
     <View style={container}>
-      <Header title={'VEIEN TIL ALLAH'} navigation={navigation} />
+      <Header title={'HomeScreen'} navigation={navigation} />
       <View style={innerContainer}>
-        <FlatList
-          data={data}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingBottom: 30,
-          }}
-          renderItem={renderItem}
-        />
+        <View style={{marginTop: 30}}>
+          <FlatList
+            data={data}
+            contentContainerStyle={{
+              paddingHorizontal: 20,
+              paddingBottom: 30,
+            }}
+            renderItem={renderItem}
+          />
+        </View>
       </View>
     </View>
   );
@@ -65,29 +67,26 @@ const LibraryScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
-    marginTop: 30,
-    paddingTop: 30,
+    backgroundColor: colors.orangeLight,
+    flex: 1,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    elevation: 3,
   },
   titleContainer: {
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#fff',
     borderRadius: 30,
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: colors.lightgrey,
     marginBottom: 25,
     elevation: 4,
   },
   titleText: {
-    fontSize: 17,
-    color: colors.orangeMedium,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.orangeDark,
   },
 });
 

@@ -15,6 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RenderItem from './RenderItem';
 import Header from '../../components/Header';
 import CountDown from 'react-native-countdown-component';
+import { Shadow } from 'react-native-shadow-2';
 
 const HomeScreen = ({navigation}) => {
   const [city, setCity] = useState('OSLO');
@@ -89,7 +90,7 @@ const HomeScreen = ({navigation}) => {
               }}
               renderDropdownIcon={ () =>
                   (<MaterialIcons
-                    style={{fontWeight: '900'}}
+                    style={{fontWeight: '900', color: colors.red}}
                     size={20}
                     origin={'arrow-drop-down-circle'}
                     name={'arrow-drop-down-circle'}
@@ -135,10 +136,10 @@ const HomeScreen = ({navigation}) => {
           contentContainerStyle={{
             marginHorizontal: 39,
             marginTop: 30,
-            borderColor: colors.orangeMedium,
+            borderColor: colors.orangeDark,
             borderWidth: 1,
             borderRadius: 15,
-            backgroundColor: '#fff',
+            backgroundColor: colors.lightgrey,
             elevation: 4,
             margin: 5,
           }}
@@ -154,7 +155,7 @@ const HomeScreen = ({navigation}) => {
           until={until/1000}
           onFinish={() => alert(nextAlarm)}
           digitStyle={{marginBottom: 0,width: 60}}
-          digitTxtStyle={{color: colors.darkBlue}}
+          digitTxtStyle={{color: colors.Blue}}
           timeToShow={['H', 'M', 'S']}
           timeLabels={{m: null, s: null}}
           showSeparator
@@ -168,12 +169,11 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
+    backgroundColor: colors.orangeLight,
     flex: 1,
-    marginTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 5,
@@ -193,18 +193,21 @@ const styles = StyleSheet.create({
     height:40, 
     padding: 0, 
     borderRadius: 20,
+    color: colors.red
   },
   dropdownStyle: {
     backgroundColor: colors.orangeLight, 
-    borderRadius: 10
+    borderRadius: 10,
+    color: colors.red
   },
   dateStyle: {
-    color: "#d86c6c", 
+    color: colors.red, 
     textAlign: 'center', 
     fontWeight: 'bold', 
     fontSize: 17, 
     backgroundColor: colors.orangeLight, 
-    width: '100%', height:40, 
+    width: '100%', 
+    height: 40, 
     paddingTop: 10, 
     paddingLeft: 20, 
     borderRadius: 20, 
@@ -213,10 +216,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    color: "#d86c6c"
+    color: colors.red
   },
   buttonTextStyle: {
-    color: "#d86c6c"
+    color: colors.red
   }
 });
 

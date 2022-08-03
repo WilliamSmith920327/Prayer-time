@@ -8,10 +8,9 @@ import asturlab from 'asturlab';
 import { Shadow } from 'react-native-shadow-2';
 import timezoneData from '../../components/PrayerTableData';
 
-
 const QiblaScreen = props => {
   const spinValue = new Animated.Value(0);
-  const {container} = styles;
+  const {container, innerContainer} = styles;
   const qibla = asturlab('59.9167', '10.75');
 
   React.useEffect(() => {
@@ -31,36 +30,38 @@ const QiblaScreen = props => {
   return (
     <View style={container}>
       <Header title={'Prayer'} navigation={props.navigation} />
-      <View
-        style={{
-          backgroundColor: colors.orangeExtraLight,
-          flex: 1,
-          justifyContent: "center",
-          marginTop: 30,
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          elevation: 30,
-          padding: 35,
-        }}>
-          <Shadow
-            distance={10}  
-            radius={200}
-            >
-            <ImageBackground 
-              source={require('../../assets/images/compass_background.png')} 
-              resizeMode="contain"
-              style={styles.imageBackground}
-            >
-              <Animated.Image
-                  style={[
-                    styles.direction,
-                    {transform: [{rotate: spin}]},
-                  ]}
-                  resizeMode="contain"
-                  source={require('../../assets/images/compass_direction.png')}
-                />
-          </ImageBackground>
-        </Shadow>
+      <View style={innerContainer}>
+        <View
+          style={{
+            backgroundColor: colors.orangeLight,
+            flex: 1,
+            justifyContent: "center",
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            elevation: 30,
+            padding: 35,
+          }}>
+            <Shadow
+              distance={10}  
+              radius={200}
+              >
+              <ImageBackground 
+                source={require('../../assets/images/compass_background.png')} 
+                resizeMode="contain"
+                style={styles.imageBackground}
+              >
+                <Animated.Image
+                    style={[
+                      styles.direction,
+                      {transform: [{rotate: spin}]},
+                    ]}
+                    resizeMode="contain"
+                    source={require('../../assets/images/compass_direction.png')}
+                  />
+            </ImageBackground>
+          </Shadow>
+        </View>
+
       </View>
     </View>
   );
@@ -69,7 +70,15 @@ const QiblaScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
+  },
+  innerContainer: {
+    backgroundColor: colors.orangeLight,
+    flex: 1,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    elevation: 5,
+    height: '100%'
   },
   imageBackground: {
     width: "100%",

@@ -20,16 +20,22 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const DrawerContent = props => {
-const {Lucida} = Fonts;
-const status = props.state.history[1] ? true: false;
+  const progress = useDrawerProgress();
+  const status = props.state.history[1] ? true: false;
+  
+  const bubbleStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(progress.value, [1, 0], [1, 0])
+    return { opacity: opacity};
+  });
+
   return (
     <Animated.View
       style={{
         flex: 1,
-        backgroundColor: colors.darkBlue,
+        backgroundColor: colors.Blue,
         width: '100%',
         marginTop: '40%',
-        // marginVertical:'50%'
+        position:'relative'
       }}>
       <DrawerContentScrollView {...props} scrollEnabled={false}>
         <DrawerItem
@@ -37,7 +43,7 @@ const status = props.state.history[1] ? true: false;
           icon={() =>
             <FontAwesome name="user-o" size={20} color={'#fff'} />
           }
-          labelStyle={[styles.drawerLblStyle, Lucida]}
+          labelStyle={[styles.drawerLblStyle]}
           onPress={() => props.navigation.navigate('AboutUsScreen')}
         />
         <DrawerItem
@@ -45,7 +51,7 @@ const status = props.state.history[1] ? true: false;
           icon={() =>
             <FontAwesome name="table" size={20} color={'#fff'}/>
           }
-          labelStyle={[styles.drawerLblStyle, Lucida]}
+          labelStyle={[styles.drawerLblStyle]}
           style={{width: '100%'}}
           onPress={() => props.navigation.navigate('PrayerScreen')}
         />
@@ -82,24 +88,61 @@ const status = props.state.history[1] ? true: false;
           onPress={() => props.navigation.navigate('DuaScreen')}
         />
       </DrawerContentScrollView>
-      <TouchableOpacity
-        onPress={() => {Linking.openURL('https://2022.veientilallah.no/')}}
-        >
-        <Text
-          style={[
-            {
-              color: '#fff', 
-              textAlign: 'center', 
-              fontSize: 20, 
-              marginBottom: 20, 
-              marginRight: -200, 
-              display: status ? 'flex': 'none'
-            }, 
-              Lucida
-          ]}>
-          www.veientilallah.no
-        </Text>
-      </TouchableOpacity>
+      <Animated.View style={[bubbleStyle, {display: status ? 'flex': 'none'}]}>
+        <TouchableOpacity
+          onPress={() => {Linking.openURL('https://2022.veientilallah.no/')}}
+          >
+          <Text
+            style={{
+                color: '#fff', 
+                textAlign: 'center', 
+                fontSize: 20, 
+                marginBottom: 20, 
+                marginRight: -200, 
+                display: status ? 'flex': 'none'
+              }}>
+            www.veientilallah.no
+          </Text>
+        </TouchableOpacity>
+        <View style={{
+          borderRadius: 70,
+          width: 120,
+          height: 120,
+          position: 'absolute',
+          left: 200,
+          top: -760,
+          backgroundColor: colors.red,
+          }}></View>
+        <View style={{
+          borderRadius: 50,
+          width: 25,
+          height: 25,
+          position: 'absolute',
+          left: 320,
+          top: -650,
+          borderWidth: 5,
+          borderColor: colors.red,
+          }}></View>
+        <View style={{
+          borderRadius: 50,
+          width: 25,
+          height: 25,
+          position: 'absolute',
+          left: 170,
+          top: -240,
+          borderWidth: 5,
+          borderColor: colors.red,
+          }}></View>
+          <View style={{
+          borderRadius: 50,
+          width: 100,
+          height: 100,
+          position: 'absolute',
+          left: 50,
+          top: -150,
+          backgroundColor: colors.red,
+        }}></View>
+      </Animated.View>
     </Animated.View>
   );
 };
@@ -108,7 +151,7 @@ export const Screens = ({navigation, style}) => {
   const progress = useDrawerProgress();
 
   const ourStyle = useAnimatedStyle(() => {
-    const scale = interpolate(progress.value, [0, 1], [1, 0.8]);
+    const scale = interpolate(progress.value, [0, 1], [1, 0.7]);
     const borderRadius = interpolate(progress.value, [0, 1], [0, 20]);
     return {transform: [{scale}], borderRadius};
   });
@@ -130,15 +173,15 @@ export const Screens = ({navigation, style}) => {
 
 export default () => {
   return (
-    <View style={{flex: 1, backgroundColor: colors.darkBlue}}>
+    <View style={{flex: 1, backgroundColor: colors.Blue}}>
       <Drawer.Navigator
         screenOptions={{
           drawerType: 'slide',
           overlayColor: 'transparent',
           drawerStyle: {
             width: '50%',
-            // flex: 1,
-            backgroundColor: colors.darkBlue,
+            flex: 1,
+            backgroundColor: colors.Blue,
           },
           headerTransparent: true,
           sceneContainerStyle: {backgroundColor: 'transparent'},
@@ -155,39 +198,19 @@ export default () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scene: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-
-    elevation: 24,
-    backgroundColor: 'transparent',
-  },
-  stack: {
-    flex: 1,
-    shadowColor: '#FFF',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
-    elevation: 5,
-    overflow: 'hidden',
-  },
-
   drawerLblStyle: {
     fontWeight: '500',
     fontSize: 18,
     color: '#fff',
     marginVertical: 6
-    // marginLeft: -15
   },
+  bubble: {
+    borderRadius: 50,
+    width: 100,
+    height: 100,
+    position: 'absolute',
+    left: 200,
+    top: -130,
+    backgroundColor: colors.red
+  }
 });

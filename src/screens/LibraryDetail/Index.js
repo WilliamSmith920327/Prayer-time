@@ -34,7 +34,7 @@ const LibraryDetailScreen = props => {
       <Header title={'LibraryScreen'} navigation={props.navigation} />
       <View style={innerContainer}>
         <View style={headerContainer}>
-          <Text style={[headerTitle, RalewayBold]}>{data}</Text>
+          <Text style={[headerTitle, RalewayBold]}>{`${data} (fvmh)`}</Text>
         </View>
         <ScrollView style={containerStyle}>
           <TouchableOpacity style={titleContainer} activeOpacity={0.7}>
@@ -42,7 +42,7 @@ const LibraryDetailScreen = props => {
               source={source}
               baseStyle={{
                 marginHorizontal: 15,
-                color: colors.grey,
+                color: colors.Blue,
                 fontFamily: 'Raleway-Medium',
               }}
               systemFonts={['Raleway-Regular']}
@@ -57,16 +57,13 @@ const LibraryDetailScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
-
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
+    backgroundColor: colors.orangeLight,
     flex: 1,
-    marginTop: 30,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    elevation: 5,
   },
 
   titleContainer: {
@@ -74,14 +71,13 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     marginHorizontal: 20,
-    borderColor: colors.orangeMedium,
+    borderColor: colors.orangeDark,
     borderWidth: 1,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     marginBottom: 30,
-    backgroundColor: '#fff',
+    backgroundColor: colors.lightgrey,
     borderTopWidth: 0,
-    elevation: 4,
   },
   headerContainer: {
     backgroundColor: colors.orangeLight,
@@ -89,15 +85,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
     marginTop: 30,
-    borderColor: colors.orangeMedium,
+    borderColor: colors.orangeDark,
     borderWidth: 1,
     borderBottomWidth: 0,
-    elevation: 4,
   },
   headerTitle: {
     textAlign: 'center',
     paddingVertical: 12,
-    color: colors.orangeDark,
+    color: colors.red,
     fontSize: 16,
   },
 });

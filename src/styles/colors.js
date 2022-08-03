@@ -1,16 +1,13 @@
 export const colors = {
-  darkBlue: '#262444',
-  lightBlue: '#20D3C2',
-  primaryColor: '#0E153D',
-  primaryLight: '#20D3C2',
-  secondaryColor: '',
-  iconColor: '#d38373',
-  bubblegumLight: '#70FFF1',
-  bubblegumMedium: '#20D3C2',
-  bubblegumDark: '#168A7F',
-  orangeLight: '#fdecc8',
-  orangeMedium: '#f0a675',
-  orangeDark: '#ce756e',
-  orangeExtraLight: '#ffefd8',
-  grey: '#63666A',
+  Blue: '#262444',
+  red: '#d86c6c',
+  orangeDark: '#ffb687',
+  orangeLight: '#ffe8c6',
+  lightgrey: '#f5f5f5',
 };
+
+// blue: #262444
+// red: #d86c6c
+// dark orange: #ffb687
+// light orange: #ffe8c6
+// light grey: #f5f5f5

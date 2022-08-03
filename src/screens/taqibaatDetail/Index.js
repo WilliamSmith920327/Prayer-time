@@ -50,10 +50,10 @@ const TaqibaatDetailScreen = props => {
               marginHorizontal: 39,
               marginTop: 10,
               height: '80%',
-              borderColor: colors.orangeMedium,
+              borderColor: colors.orangeDark,
               borderWidth: 1,
               borderRadius: 15,
-              backgroundColor: '#fff',
+              backgroundColor: colors.lightgrey,
               elevation: 4,
               margin: 5,
               paddingBottom: 10
@@ -85,11 +85,10 @@ const TaqibaatDetailScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orangeMedium,
+    backgroundColor: colors.orangeDark,
   },
   innerContainer: {
-    backgroundColor: colors.orangeExtraLight,
-    marginTop: 30,
+    backgroundColor: colors.orangeLight,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 3,
@@ -98,39 +97,27 @@ const styles = StyleSheet.create({
   titleContainer: {
     justifyContent: 'space-between',
   },
-  titleContainer1: {
-    backgroundColor: colors.orangeMedium,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
   titleText: {
     fontSize: 17,
     paddingBottom: 12,
     paddingHorizontal: 20,
-    color: '#000000',
+    color: colors.Blue,
     textAlign: 'center',
   },
   containerStyle: {
-    borderColor: colors.orangeMedium,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
     paddingTop: 10,
-    backgroundColor: '#fff',
   },
   headerContainer: {
     backgroundColor: colors.orangeLight,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
-    borderColor: colors.orangeMedium,
   },
   headerTitle: {
     textAlign: 'center',
     paddingVertical: 12,
-    color: colors.orangeDark,
+    color: colors.red,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 17,
   },
 });
 
